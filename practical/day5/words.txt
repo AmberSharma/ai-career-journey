@@ -1,0 +1,2 @@
+This is a line with many words for the word count. Some words are repeated intentionally.
+This is another line with many words for the word count. Some words are repeated intentionally.
