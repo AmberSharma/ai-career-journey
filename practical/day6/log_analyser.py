@@ -22,7 +22,8 @@ def analyse_log(log_file):
         print("File not found")
         exit()
 
-result = analyse_log('log.txt')
+filename = input("Please enter the file name:")
+result = analyse_log(filename)
 print(result)
 total_errors = sum(result.values())
 
