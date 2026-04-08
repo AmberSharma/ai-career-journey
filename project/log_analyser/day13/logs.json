@@ -1,0 +1,6 @@
+[
+  {"level": "INFO", "message": "User logged in", "timestamp": "2026-04-03T10:00:00"},
+  {"level": "ERROR", "message": "Database failed", "timestamp": "2026-04-03T10:00:01"},
+  {"level": "INFO", "message": "Payment success", "timestamp": "2026-04-03T10:00:02"},
+  {"level": "ERROR", "message": "Timeout", "timestamp": "2026-04-03T10:00:03"}
+]

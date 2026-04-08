@@ -1,0 +1,4 @@
+INFO User logged in
+ERROR Database failed
+INFO Payment success
+ERROR Timeout
