@@ -84,7 +84,6 @@ def summary():
 def error():
     logs = read_logs()
     errors = filter_logs(logs, "error")
-    # errors = (log for log in logs if log["level"] == "ERROR")
     return {"errors": errors}
 
 @app.get("/log/infos")
