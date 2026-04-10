@@ -1,6 +1,41 @@
 [
-  {"level": "INFO", "message": "User logged in", "timestamp": "2026-04-03T10:00:00"},
-  {"level": "ERROR", "message": "Database failed", "timestamp": "2026-04-03T10:00:01"},
-  {"level": "INFO", "message": "Payment success", "timestamp": "2026-04-03T10:00:02"},
-  {"level": "ERROR", "message": "Timeout", "timestamp": "2026-04-03T10:00:03"}
+  {
+    "level": "INFO",
+    "message": "User logged in",
+    "timestamp": "2026-04-03T10:00:00"
+  },
+  {
+    "level": "ERROR",
+    "message": "Database failed",
+    "timestamp": "2026-04-03T10:00:01"
+  },
+  {
+    "level": "INFO",
+    "message": "Payment success",
+    "timestamp": "2026-04-03T10:00:02"
+  },
+  {
+    "level": "ERROR",
+    "message": "Timeout",
+    "timestamp": "2026-04-03T10:00:03"
+  },
+  {
+    "level": "INFO",
+    "message": "New info log added from api"
+  },
+  {
+    "level": "INFO",
+    "message": "INFO Message",
+    "timestamp": "2026-04-10T21:38:49"
+  },
+  {
+    "level": "INFO",
+    "message": "Another INFO Message",
+    "timestamp": "2026-04-10T21:41:16"
+  },
+  {
+    "level": "INFO",
+    "message": "New INFO Message",
+    "timestamp": "2026-04-10T21:45:36"
+  }
 ]

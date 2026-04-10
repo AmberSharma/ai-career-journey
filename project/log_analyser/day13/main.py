@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException
 from pathlib import Path
 from pydantic import BaseModel
 from typing import List
+from datetime import datetime
 
 
 app = FastAPI()
@@ -30,8 +31,19 @@ def filter_logs(logs: List[str], log_type: str) -> List[str]:
 
     return logs
 
+def write_logs(new_log):
+    with open(SCRIPT_DIR / "logs.json","r") as f:
+        logs = json.load(f)
+    print(new_log, flush=True)
+    # new_log.timestamp = str(datetime.now())
+    log_with_timestamp = new_log.model_dump()
+    log_with_timestamp["timestamp"] = str(datetime.now().isoformat(timespec='seconds'))
+    logs.append(log_with_timestamp)
+    with open(SCRIPT_DIR / "logs.json","w") as f:
+        json.dump(logs, f, indent=2)
+
 def validate_type(log_type: str):
-    if log_type not in ["error", "info", None]:
+    if log_type is not None and log_type.lower() not in ["error", "info", None]:
         raise HTTPException(status_code=400, detail="Invalid log type")
     return True
 
@@ -67,6 +79,13 @@ def logs(type: str = None, limit: int = None):
         filtered_logs = filtered_logs[:limit]
 
     return {"logs":[l for l in  filtered_logs]}
+
+@app.post("/logs")
+def add_logs(log: Log):
+    validate_type(log.level)
+
+    write_logs(log)
+    return {"message": "Log Added Successfully"}
 
 @app.get("/logs/count")
 def log_count(type: str = None):
