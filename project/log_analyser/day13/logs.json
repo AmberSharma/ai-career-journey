@@ -47,5 +47,25 @@
     "level": "INFO",
     "message": "New Log 2",
     "timestamp": "2026-04-12T23:26:48"
+  },
+  {
+    "level": "INFO",
+    "message": "INFO Message",
+    "timestamp": "2026-04-13T20:59:53"
+  },
+  {
+    "level": "INFO",
+    "message": "INFO Message",
+    "timestamp": "2026-04-13T22:01:38"
+  },
+  {
+    "level": "INFO",
+    "message": "INFO Message",
+    "timestamp": "2026-04-13T22:02:16"
+  },
+  {
+    "level": "INFO",
+    "message": "INFO Message",
+    "timestamp": "2026-04-13T22:02:18"
   }
 ]
