@@ -1,12 +1,19 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, Header, Depends
 from services.log_service import get_logs, add_logs, update_log, delete_log, patch_log
 from utils.file_handler import write_logs, read_logs, filter_logs, validate_type, log_analyser
 from models.log_model import Log, LogRequest, LogUpdateOptional
+from utils.auth import get_current_user, admin_only
 
 router = APIRouter()
 
+def validate_token(token: str):
+    if token != "secret123":
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
 @router.get("/logs")
-def fetch_logs(type: str = None):
+def fetch_logs(type: str = None, user = Depends(get_current_user)):
+    # return token
+    # validate_token(token)
     logs = get_logs(type)
     return {"logs": [
         {"id": log.id, "level": log.level, "message": log.message} for log in logs
@@ -26,7 +33,8 @@ def update_logs(log_id: int, data: Log):
         return "Log with id:"+str(log_id)+" not found"
 
 @router.delete("/log")
-def delete_logs(log_id: int):
+def delete_logs(log_id: int, user = Depends(get_current_user)):
+    admin_only(user)
     response = delete_log(log_id)
     if response:
         return "Log deleted successfully"
