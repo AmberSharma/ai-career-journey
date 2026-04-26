@@ -1,8 +1,10 @@
 from fastapi import APIRouter, HTTPException, Header, Depends
 from services.log_service import get_logs, add_logs, update_log, delete_log, patch_log
+from sqlalchemy.testing.pickleable import User
 from utils.file_handler import write_logs, read_logs, filter_logs, validate_type, log_analyser
 from models.log_model import Log, LogRequest, LogUpdateOptional
 from utils.auth import get_current_user, admin_only
+from utils.ai import analyse_log_with_ai
 
 router = APIRouter()
 
@@ -23,6 +25,12 @@ def fetch_logs(type: str = None, user = Depends(get_current_user)):
 def create_logs(log: Log):
     add_logs(log)
     return {"log": "Log created successfully"}
+
+@router.post("/logs/ai_analyse")
+async def ai_analyse(user = Depends(get_current_user)):
+    logs = get_logs()
+    insights = await analyse_log_with_ai(logs)
+    return {"insights": insights}
 
 @router.put("/log")
 def update_logs(log_id: int, data: Log):

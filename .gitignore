@@ -19,3 +19,7 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# Environment variables
+.env
+project/log_analyser/day13/.env
