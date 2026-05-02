@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Header, Depends
+from fastapi import APIRouter, HTTPException, Header, Depends, BackgroundTasks
 from services.log_service import get_logs, add_logs, update_log, delete_log, patch_log
 from sqlalchemy.testing.pickleable import User
 from utils.file_handler import write_logs, read_logs, filter_logs, validate_type, log_analyser
@@ -11,6 +11,19 @@ router = APIRouter()
 def validate_token(token: str):
     if token != "secret123":
         raise HTTPException(status_code=401, detail="Unauthorized")
+
+async def run_ai_analysis():
+    error_logs = get_logs("error")
+    if error_logs:
+        insights = await analyse_log_with_ai(error_logs)
+        print("insights", insights)
+
+@router.post("/logs/ai-background")
+def ai_background(background_tasks: BackgroundTasks):
+    background_tasks.add_task(run_ai_analysis)
+    return {
+        "message": "AI task started in background"
+    }
 
 @router.get("/logs")
 def fetch_logs(type: str = None, user = Depends(get_current_user)):
@@ -28,7 +41,8 @@ def create_logs(log: Log):
 
 @router.post("/logs/ai_analyse")
 async def ai_analyse(user = Depends(get_current_user)):
-    logs = get_logs()
+    logs = get_logs("error")
+    print(logs)
     insights = await analyse_log_with_ai(logs)
     return {"insights": insights}
 

@@ -22,3 +22,6 @@ class LogDB(Base):
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     level = Column(String)
     message = Column(String)
+
+    def __repr__(self):
+        return f"Log(id={self.id}, level={self.level}, message={self.message})"

@@ -22,6 +22,8 @@ Analyse the following logs and respond in JSON format:
     "summary": "short summary",
     "recommendation": "actionable suggestion"
 }}
+
+Only count logs that are actually present in the input. If no logs of a certain level exist, return 0.
 """
 
 
