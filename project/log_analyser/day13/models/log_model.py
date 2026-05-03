@@ -25,3 +25,6 @@ class LogDB(Base):
 
     def __repr__(self):
         return f"Log(id={self.id}, level={self.level}, message={self.message})"
+
+class Queue(BaseModel):
+    data: dict = {}
