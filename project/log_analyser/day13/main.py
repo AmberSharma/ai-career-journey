@@ -1,7 +1,9 @@
 import sys
 from pathlib import Path
-from models.log_model import Base
+from models.base import Base
 from db import engine
+from models.log_model import LogDB
+from models.job_model import JobDB
 
 sys.path.insert(0, str(Path(__file__).parent))
 
